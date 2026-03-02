@@ -1,0 +1,15 @@
+services:
+  frontend:
+    build: ./frontend
+    ports: ["3000:3000"]
+    env_file: .env.local  # assuming nextjs env
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+  backend:
+    build: ./backend
+    ports: ["8000:8000"]
+    env_file: ./backend/.env
+    volumes:
+      - ./backend:/app
