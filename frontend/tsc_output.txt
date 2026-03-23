@@ -1,0 +1,2 @@
+app/components/RiskMap.tsx(5,30): error TS7016: Could not find a declaration file for module 'react-leaflet-heatmap-layer-v3'. 'C:/Users/lomoe/Downloads/restoreghana-main/restoreghana-main/frontend/node_modules/react-leaflet-heatmap-layer-v3/lib/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/react-leaflet-heatmap-layer-v3` if it exists or add a new declaration (.d.ts) file containing `declare module 'react-leaflet-heatmap-layer-v3';`

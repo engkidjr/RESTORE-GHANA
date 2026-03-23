@@ -1,0 +1,7 @@
+app/components/GibbyChat.tsx(117,6): error TS17008: JSX element 'div' has no corresponding closing tag.
+app/components/GibbyChat.tsx(137,8): error TS17008: JSX element 'div' has no corresponding closing tag.
+app/components/GibbyChat.tsx(138,10): error TS17008: JSX element 'AnimatePresence' has no corresponding closing tag.
+app/components/GibbyChat.tsx(140,14): error TS17008: JSX element 'motion.div' has no corresponding closing tag.
+app/components/GibbyChat.tsx(147,16): error TS17008: JSX element 'div' has no corresponding closing tag.
+app/components/GibbyChat.tsx(164,95): error TS1002: Unterminated string literal.
+app/components/GibbyChat.tsx(164,95): error TS1005: '</' expected.

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RestoreGhana – Corporate Commitment & Guardian Rewards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:   #22c55e;
+      --green-d: #16a34a;
+      --gold:    #f59e0b;
+      --red:     #ef4444;
+      --blue:    #3b82f6;
+      --purple:  #a855f7;
+      --bg:      #050d0a;
+      --card:    rgba(255,255,255,.035);
+      --border:  rgba(255,255,255,.07);
+      --text:    #e2e8f0;
+      --muted:   #64748b;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── background glow ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 100% 50% at 20%  0%,  rgba(245,158,11,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 100% 50% at 80%  100%, rgba(34,197,94,.07) 0%, transparent 60%);
+    }
+
+    /* ── nav ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(18px);
+      background: rgba(5,13,10,.75);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 40px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 800; font-size: .95rem; letter-spacing: -.01em;
+    }
+    .nav-logo span { color: var(--green); }
+    .nav-tabs { display: flex; gap: 6px; }
+    .nav-tab {
+      padding: 7px 16px; border-radius: 8px; font-size: .8rem; font-weight: 600;
+      cursor: pointer; transition: background .2s, color .2s; border: none;
+      background: transparent; color: var(--muted); letter-spacing: .02em;
+    }
+    .nav-tab:hover   { background: rgba(255,255,255,.06); color: var(--text); }
+    .nav-tab.active  { background: rgba(34,197,94,.15); color: var(--green); }
+
+    /* ── page wrapper ── */
+    .page { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 24px 100px; }
+
+    /* ── sections (tabs) ── */
+    .section { display: none; }
+    .section.visible { display: block; }
+
+    /* ── hero ── */
+    .hero {
+      padding: 72px 0 56px;
+      text-align: center;
+      animation: fadeUp .6s ease both;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 18px; border-radius: 999px;
+      font-size: .7rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; margin-bottom: 24px;
+    }
+    .badge-gold  { background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.3); color: var(--gold); }
+    .badge-green { background: rgba(34,197,94,.12);  border: 1px solid rgba(34,197,94,.3);  color: var(--green); }
+
+    .hero h1 {
+      font-size: clamp(1.9rem, 4.5vw, 3.2rem); font-weight: 900; line-height: 1.1;
+      letter-spacing: -.03em; margin-bottom: 18px;
+    }
+    .hero h1 .accent-gold  { color: var(--gold); }
+    .hero h1 .accent-green { color: var(--green); }
+
+    .hero-sub {
+      font-size: 1rem; color: #94a3b8; max-width: 680px; margin: 0 auto 0; line-height: 1.65;
+    }
+
+    /* ── big intro quote ── */
+    .intro-quote {
+      background: var(--card); border-left: 3px solid var(--gold);
+      border-radius: 0 16px 16px 0; padding: 28px 32px;
+      margin-bottom: 52px; font-size: .92rem; line-height: 1.75; color: #cbd5e1;
+      animation: fadeUp .6s ease .1s both;
+    }
+    .intro-quote.green-border { border-left-color: var(--green); }
+
+    /* ── clause cards ── */
+    .clauses { display: flex; flex-direction: column; gap: 24px; margin-bottom: 52px; }
+    .clause {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px;
+      animation: fadeUp .5s ease both;
+      transition: transform .3s, box-shadow .3s;
+      position: relative; overflow: hidden;
+    }
+    .clause:hover { transform: translateY(-4px); box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+    .clause::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      border-radius: 20px 20px 0 0;
+    }
+    .clause.gold::before   { background: linear-gradient(90deg, var(--gold), transparent); }
+    .clause.red::before    { background: linear-gradient(90deg, var(--red),  transparent); }
+    .clause.purple::before { background: linear-gradient(90deg, var(--purple), transparent); }
+
+    .clause-header {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+    }
+    .clause-icon {
+      width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+    }
+    .clause-icon.gold   { background: rgba(245,158,11,.12); }
+    .clause-icon.red    { background: rgba(239,68,68,.12); }
+    .clause-icon.purple { background: rgba(168,85,247,.12); }
+
+    .clause-meta { flex: 1; }
+    .clause-roman { font-size: .68rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 4px; }
+    .clause-roman.gold   { color: var(--gold); }
+    .clause-roman.red    { color: var(--red); }
+    .clause-roman.purple { color: var(--purple); }
+    .clause h2 { font-size: 1.05rem; font-weight: 800; margin: 0; line-height: 1.25; }
+
+    .clause p  { font-size: .875rem; color: #94a3b8; line-height: 1.68; margin-bottom: 16px; }
+    .clause p:last-child { margin-bottom: 0; }
+
+    .clause ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .clause ul li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: .875rem; color: #94a3b8; line-height: 1.6;
+    }
+    .clause ul li::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 7px;
+    }
+    .clause.gold   ul li::before { background: var(--gold); }
+    .clause.red    ul li::before { background: var(--red); }
+    .clause.purple ul li::before { background: var(--purple); }
+
+    /* ── compliance status badge ── */
+    .status-strip {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      background: rgba(239,68,68,.06); border: 1px solid rgba(239,68,68,.2);
+      border-radius: 14px; padding: 20px 24px; margin-bottom: 52px;
+      animation: fadeUp .5s ease .4s both;
+    }
+    .status-pill {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(239,68,68,.14); border: 1px solid rgba(239,68,68,.3);
+      color: var(--red); border-radius: 8px; padding: 6px 14px;
+      font-size: .75rem; font-weight: 700; letter-spacing: .06em;
+    }
+    .status-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); animation: blink 1s ease infinite; }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+    .status-strip p { font-size: .82rem; color: #94a3b8; line-height: 1.5; flex: 1; min-width: 200px; }
+    .status-strip strong { color: var(--red); }
+
+    /* ── reward cards ── */
+    .rewards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 48px; }
+    .reward-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px;
+      animation: fadeUp .5s ease both;
+      transition: transform .3s, box-shadow .3s;
+      position: relative; overflow: hidden;
+    }
+    .reward-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,.5); }
+    .reward-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--green), transparent); border-radius: 20px 20px 0 0;
+    }
+    .reward-num {
+      width: 36px; height: 36px; border-radius: 10px; background: rgba(34,197,94,.12);
+      color: var(--green); font-size: .8rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .reward-card h3 { font-size: .92rem; font-weight: 800; margin-bottom: 8px; }
+    .reward-card p  { font-size: .82rem; color: #94a3b8; line-height: 1.6; }
+    .reward-card .highlight {
+      display: inline-block; margin-top: 12px;
+      background: rgba(34,197,94,.12); border: 1px solid rgba(34,197,94,.25);
+      color: var(--green); font-size: .8rem; font-weight: 700;
+      border-radius: 8px; padding: 5px 12px;
+    }
+
+    /* ── points calculator ── */
+    .calculator {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px;
+      margin-bottom: 48px;
+      animation: fadeUp .5s ease .3s both;
+    }
+    .calculator h2 { font-size: 1rem; font-weight: 800; margin-bottom: 24px; }
+    .calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+    .calc-item {
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+      border-radius: 14px; padding: 20px; text-align: center;
+    }
+    .calc-value { font-size: 1.8rem; font-weight: 900; line-height: 1; margin-bottom: 8px; }
+    .calc-value.green  { color: var(--green); }
+    .calc-value.gold   { color: var(--gold); }
+    .calc-value.white  { color: #fff; }
+    .calc-label { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+
+    /* ── leaderboard teaser ── */
+    .leaderboard {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px;
+      animation: fadeUp .5s ease .4s both;
+    }
+    .leaderboard h2 { font-size: .95rem; font-weight: 800; margin-bottom: 18px; }
+    .lb-row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+    }
+    .lb-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .lb-rank {
+      width: 28px; height: 28px; border-radius: 8px;
+      font-size: .75rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .lb-rank.gold   { background: rgba(245,158,11,.2); color: var(--gold); }
+    .lb-rank.silver { background: rgba(148,163,184,.15); color: #94a3b8; }
+    .lb-rank.bronze { background: rgba(180,120,60,.15); color: #cd7f32; }
+    .lb-info { flex: 1; }
+    .lb-name  { font-size: .85rem; font-weight: 700; margin-bottom: 2px; }
+    .lb-badge {
+      display: inline-block; font-size: .65rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 4px; letter-spacing: .06em;
+    }
+    .badge-guardian { background: rgba(34,197,94,.15); color: var(--green); border: 1px solid rgba(34,197,94,.25); }
+    .badge-elite    { background: rgba(245,158,11,.15); color: var(--gold);  border: 1px solid rgba(245,158,11,.25); }
+    .badge-star     { background: rgba(59,130,246,.15); color: var(--blue);  border: 1px solid rgba(59,130,246,.25); }
+    .lb-points { font-size: .9rem; font-weight: 800; color: var(--green); }
+
+    /* ── disclaimer ── */
+    .disclaimer {
+      margin-top: 40px;
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+      border-radius: 14px; padding: 20px 24px;
+      font-size: .78rem; color: var(--muted); line-height: 1.6;
+      animation: fadeUp .5s ease .5s both;
+    }
+    .disclaimer strong { color: #94a3b8; }
+
+    /* ── animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── responsive ── */
+    @media (max-width: 600px) {
+      nav { padding: 12px 16px; }
+      .intro-quote { padding: 20px; }
+      .clause { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div style="display: flex; align-items: center; gap: 24px;">
+    <a href="/" class="nav-tab" style="text-decoration: none; display: flex; align-items: center; gap: 6px;">&larr; Back to Platform</a>
+    <div class="nav-logo">🌿 <span>Restore</span>Ghana</div>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTo('corporate', this)">🏭 Corporate</button>
+    <button class="nav-tab"       onclick="switchTo('citizen',   this)">🛡️ Guardian Rewards</button>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- ════════════════════════════════════════════
+       CORPORATE SECTION
+  ════════════════════════════════════════════ -->
+  <div id="corporate" class="section visible">
+
+    <div class="hero">
+      <div class="hero-badge badge-gold">⚖️ Binding Agreement · Corporations & Mining Entities</div>
+      <h1>Corporate Environmental Recovery<br /><span class="accent-gold">&amp; Compliance Agreement</span></h1>
+      <p class="hero-sub">
+        By partnering with RestoreGhana, participating corporations and mining entities commit to a
+        transparent, data-driven restoration process. This is not just a sponsorship; it is a
+        <strong style="color:#e2e8f0">binding commitment to national recovery.</strong>
+      </p>
+    </div>
+
+    <div class="intro-quote">
+      This agreement is enforceable through RestoreGhana's automated compliance infrastructure and reported
+      directly to the <strong style="color:#f59e0b">Environmental Protection Agency (EPA)</strong>. All
+      performance data is publicly visible on the National Recovery Dashboard in real-time.
+    </div>
+
+    <div class="clauses">
+
+      <!-- Clause I -->
+      <div class="clause gold" style="animation-delay:.1s">
+        <div class="clause-header">
+          <div class="clause-icon gold">📸</div>
+          <div class="clause-meta">
+            <div class="clause-roman gold">Article I</div>
+            <h2>Mandatory Proof-of-Restoration</h2>
+          </div>
+        </div>
+        <p>
+          To ensure absolute transparency, all <strong style="color:#e2e8f0">Adopt-a-Region</strong> partners
+          are required to upload time-stamped, GPS-tagged photographic and video evidence at every project
+          milestone. Submitted data must clearly demonstrate physical environmental improvement:
+        </p>
+        <ul>
+          <li>Water de-turbidization measurements &amp; before/after imagery</li>
+          <li>Soil reclamation reports verified against satellite readings</li>
+          <li>Evidence cross-validated by community reports and Gibby AI analysis</li>
+        </ul>
+      </div>
+
+      <!-- Clause II -->
+      <div class="clause red" style="animation-delay:.2s">
+        <div class="clause-header">
+          <div class="clause-icon red">🚨</div>
+          <div class="clause-meta">
+            <div class="clause-roman red">Article II</div>
+            <h2>The Non-Compliance Fine</h2>
+          </div>
+        </div>
+        <p>
+          RestoreGhana operates an automated <strong style="color:#ef4444">"Red Flag" system</strong>. A
+          financial penalty — the <strong style="color:#ef4444">Restoration Fine</strong> — is automatically
+          triggered and reported to the EPA under any of the following conditions:
+        </p>
+        <ul>
+          <li>No verifiable progress updates submitted for a period exceeding <strong style="color:#e2e8f0">3 weeks</strong></li>
+          <li>On-site data fails to show measurable improvement in water or soil quality</li>
+          <li>Submitted corporate claims are contradicted by verified community reports or satellite data</li>
+        </ul>
+      </div>
+
+      <!-- Clause III -->
+      <div class="clause purple" style="animation-delay:.3s">
+        <div class="clause-header">
+          <div class="clause-icon purple">🏛️</div>
+          <div class="clause-meta">
+            <div class="clause-roman purple">Article III</div>
+            <h2>Public Accountability</h2>
+          </div>
+        </div>
+        <p>
+          Failure to meet compliance benchmarks results in a <strong style="color:#a855f7">"Non-Compliant"</strong>
+          status on the public National Recovery Dashboard. This status:
+        </p>
+        <ul>
+          <li>Directly impacts the entity's live <strong style="color:#e2e8f0">Restoration Score</strong></li>
+          <li>Is visible to the public, press, investors, and government bodies</li>
+          <li>Remains flagged until verified remediation proof is submitted and approved</li>
+        </ul>
+      </div>
+
+    </div><!-- /clauses -->
+
+    <!-- Non-compliant status strip -->
+    <div class="status-strip">
+      <div class="status-pill"><div class="dot"></div>NON-COMPLIANT STATUS</div>
+      <p>
+        A corporation's <strong>Restoration Score</strong> and compliance history are public record on the
+        National Recovery Dashboard — permanently impacting corporate reputation until resolved.
+      </p>
+    </div>
+
+  </div><!-- /corporate section -->
+
+
+  <!-- ════════════════════════════════════════════
+       CITIZEN / GUARDIAN SECTION
+  ════════════════════════════════════════════ -->
+  <div id="citizen" class="section">
+
+    <div class="hero">
+      <div class="hero-badge badge-green">🛡️ Guardian Program · Citizens of Ghana</div>
+      <h1>Get Paid to Protect<br /><span class="accent-green">Your Community</span></h1>
+      <p class="hero-sub">
+        Your eyes on the ground help us save Ghana's water and soil. We believe in rewarding your
+        bravery and commitment to environmental justice.
+      </p>
+    </div>
+
+    <div class="intro-quote green-border">
+      Every verified report you submit makes Ghana's environment safer — and puts money directly into your
+      <strong style="color:#22c55e">mobile money wallet</strong>. No bank account or middleman needed.
+    </div>
+
+    <!-- Reward steps -->
+    <div class="rewards-grid">
+
+      <div class="reward-card" style="animation-delay:.1s">
+        <div class="reward-num">1</div>
+        <h3>📍 Report &amp; Earn</h3>
+        <p>Submit a geotagged photo of illegal mining activity or contaminated water. Our Gibby AI + admin team verifies your report.</p>
+        <div class="highlight">+5 points per verified report</div>
+      </div>
+
+      <div class="reward-card" style="animation-delay:.2s">
+        <div class="reward-num">2</div>
+        <h3>💸 Cash Out Instantly</h3>
+        <p>Once you hit 20 points, instantly redeem them for <strong style="color:#22c55e">50 GHS (Cedis)</strong> sent directly to your mobile money wallet — no waiting, no banks.</p>
+        <div class="highlight">20 pts = 50 GHS → Mobile Money</div>
+      </div>
+
+      <div class="reward-card" style="animation-delay:.3s">
+        <div class="reward-num">3</div>
+        <h3>🏅 Build Your Reputation</h3>
+        <p>Top contributors earn exclusive <strong style="color:#f59e0b">Guardian Badges</strong> and a higher rank on the community leaderboard, earning you recognition across Ghana.</p>
+        <div class="highlight">Badges · Leaderboard · Recognition</div>
+      </div>
+
+    </div>
+
+    <!-- Points calculator -->
+    <div class="calculator">
+      <h2>📊 How Points Add Up</h2>
+      <div class="calc-grid">
+        <div class="calc-item">
+          <div class="calc-value green">5</div>
+          <div class="calc-label">Points per verified report</div>
+        </div>
+        <div class="calc-item">
+          <div class="calc-value white">20</div>
+          <div class="calc-label">Points to cash out</div>
+        </div>
+        <div class="calc-item">
+          <div class="calc-value gold">50</div>
+          <div class="calc-label">GHS per redemption</div>
+        </div>
+        <div class="calc-item">
+          <div class="calc-value green">4</div>
+          <div class="calc-label">Reports = instant payout</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leaderboard teaser -->
+    <div class="leaderboard">
+      <h2>🏆 Community Leaderboard — Top Guardians</h2>
+
+      <div class="lb-row">
+        <div class="lb-rank gold">#1</div>
+        <div class="lb-info">
+          <div class="lb-name">Ama Boateng</div>
+          <span class="lb-badge badge-elite">⭐ Elite Guardian</span>
+        </div>
+        <div class="lb-points">340 pts</div>
+      </div>
+
+      <div class="lb-row">
+        <div class="lb-rank silver">#2</div>
+        <div class="lb-info">
+          <div class="lb-name">Kwame Asante</div>
+          <span class="lb-badge badge-guardian">🛡️ Guardian</span>
+        </div>
+        <div class="lb-points">275 pts</div>
+      </div>
+
+      <div class="lb-row">
+        <div class="lb-rank bronze">#3</div>
+        <div class="lb-info">
+          <div class="lb-name">Abena Mensah</div>
+          <span class="lb-badge badge-star">🌟 Rising Star</span>
+        </div>
+        <div class="lb-points">210 pts</div>
+      </div>
+
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+      <strong>Integrity Notice:</strong> To maintain the integrity of our recovery efforts, points are only
+      awarded for reports that pass our <strong>AI and Admin verification process</strong>. Duplicate, false,
+      or spam reports will not earn points and may result in account suspension. RestoreGhana reserves the
+      right to audit all submissions.
+    </div>
+
+  </div><!-- /citizen section -->
+
+</div><!-- /page -->
+
+<script>
+  function switchTo(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+    document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('visible');
+    btn.classList.add('active');
+    // re-trigger animations
+    document.querySelectorAll('#' + id + ' [style*="animation-delay"]').forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight; // reflow
+      el.style.animation = '';
+    });
+  }
+</script>
+
+</body>
+</html>

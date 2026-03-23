@@ -1,0 +1,63 @@
+
+> frontend@0.1.0 lint
+> next lint
+
+
+./app/api/analyze-hotspots/route.ts
+73:14  Error: 'parseError' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./app/business/page.tsx
+14:112  Error: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/components/GibbyChat.tsx
+167:21  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+196:13  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/Map.tsx
+3:10  Error: 'useEffect' is defined but never used.  @typescript-eslint/no-unused-vars
+
+./app/components/Navbar.tsx
+4:52  Error: 'BookOpen' is defined but never used.  @typescript-eslint/no-unused-vars
+4:68  Error: 'Briefcase' is defined but never used.  @typescript-eslint/no-unused-vars
+19:42  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./app/components/ReportForm.tsx
+46:18  Error: 'e' is defined but never used.  @typescript-eslint/no-unused-vars
+77:45  Error: 'data' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+205:33  Warning: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+./app/components/RiskMap.tsx
+4:52  Error: 'Circle' is defined but never used.  @typescript-eslint/no-unused-vars
+25:17  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+26:27  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+28:25  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+66:52  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+71:13  Error: 'ghanaCoords' is never reassigned. Use 'const' instead.  prefer-const
+71:26  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+73:49  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+77:61  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+96:49  Error: 'riskZones' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+96:65  Error: 'restorationProjects' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+96:109  Error: 'predictedHotspots' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+97:52  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./app/dashboard/page.tsx
+6:101  Error: 'Legend' is defined but never used.  @typescript-eslint/no-unused-vars
+60:39  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./app/education/page.tsx
+24:73  Error: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+24:83  Error: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`.  react/no-unescaped-entities
+77:200  Error: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./app/education/[slug]/page.tsx
+6:38  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+28:5  Error: Do not assign to the variable `module`. See: https://nextjs.org/docs/messages/no-assign-module-variable  @next/next/no-assign-module-variable
+
+./app/login/page.tsx
+36:25  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./app/signup/page.tsx
+36:25  Error: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
